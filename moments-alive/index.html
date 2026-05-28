@@ -507,7 +507,7 @@
   <!-- ── HERO ── -->
   <section class="hero">
     <p class="hero-eyebrow">זיכרונות · רגשות · קסם</p>
-    <h1 class="hero-title">יש תמונה<br>שאתם תמיד <span>עוצרים עליה.</span></h1>
+    <h1 class="hero-title">יש תמונה<br>שאתם תמיד<br><span>חוזרים אליה.</span></h1>
     <p class="hero-sub">
       אנחנו הופכים אותה לסרטון וידאו קצר שגורם לכולם לעצור — ולהרגיש.
     </p>
@@ -584,7 +584,7 @@
     <h2 class="section-title">תנו לרגע הזה לחיות שוב</h2>
 
     <div class="price-badge">
-      ₪99 <span>סרטון אחד · עד 10 שניות</span>
+      ₪55 <span>סרטון אחד · עד 10 שניות</span>
     </div>
 
     <form id="mainForm">
@@ -619,7 +619,7 @@
         <textarea id="description" name="description" placeholder="למשל: זאת סבתא שלי לוקחת אותי לגן ילדים, אני בן 4. היא כבר לא איתנו. רציתי שתהיה לה תנועה, חיוך, חיים..." required></textarea>
       </div>
 
-      <button type="button" id="submitBtn" class="submit-btn" onclick="handleSubmit()">שולחים את התמונה שלי עכשיו ←</button>
+      <button type="button" id="submitBtn" class="submit-btn" onclick="handleSubmit()">תעשו לי קסם מהרגע הזה ←</button>
       <p class="form-note">
         לאחר הגשה נחזור אליכם עם פרטי תשלום.<br>
         הסרטון מגיע תוך 24-48 שעות.
@@ -732,7 +732,7 @@
         // 2. Send contact details + photo link via Web3Forms
         const web3Data = new FormData();
         web3Data.append('access_key', 'be13056e-061a-4d23-b9b2-b2b5bf5ed7da');
-        web3Data.append('subject', 'הזמנה חדשה - רגעים חיים');
+        web3Data.append('subject', 'הזמנה חדשה - רגעים חיים ₪55');
         web3Data.append('from_name', 'רגעים חיים');
         web3Data.append('שם', name);
         web3Data.append('טלפון', phone);
