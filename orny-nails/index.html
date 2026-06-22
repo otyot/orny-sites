@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-<title>×§×××¢×ª ×ª××¨ | Orny Nails</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
+<title>קביעת תור | Orny Nails</title>
 <style>
   :root{
     --cream:#FBF3EE;
@@ -79,7 +82,7 @@
     text-align:center;
   }
 
-  /* ââ Service cards ââ */
+  /* ── Service cards ── */
   .service-grid{display:flex;flex-direction:column;gap:14px;}
   .service-card{
     border:2px solid var(--line);
@@ -108,7 +111,7 @@
   .service-text strong{display:block;font-size:17px;}
   .service-text span{font-size:13px;color:var(--ink-soft);}
 
-  /* ââ Calendar ââ */
+  /* ── Calendar ── */
   .cal-wrap{
     background:#fff;
     border-radius:18px;
@@ -184,7 +187,6 @@
     cursor:default;
     pointer-events:none;
   }
-  /* Holiday days â gold dot indicator */
   .cal-day.holiday{
     color:#D9CBCC;
     cursor:default;
@@ -200,7 +202,6 @@
     border-radius:50%;
     background:var(--gold);
   }
-  /* Holiday name strip below the grid */
   .holiday-label{
     min-height:20px;
     margin-top:10px;
@@ -218,7 +219,6 @@
     font-weight:bold;
   }
 
-  /* ââ Time slots ââ */
   .slots-label{
     font-size:13px;
     color:var(--ink-soft);
@@ -250,7 +250,6 @@
     padding:30px 10px;
   }
 
-  /* ââ Form ââ */
   label{
     display:block;
     font-size:14px;
@@ -311,7 +310,6 @@
     cursor:pointer;
   }
 
-  /* ââ Confirmation ââ */
   .confirm-wrap{text-align:center;padding-top:10px;}
   .confirm-icon{
     width:64px;height:64px;
@@ -356,7 +354,7 @@
 
   <header class="top">
     <p class="brand">Orny Nails</p>
-    <p class="brand-sub">×§×××¢×ª ×ª××¨</p>
+    <p class="brand-sub">קביעת תור</p>
     <div class="progress" id="progressDots">
       <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
@@ -364,97 +362,91 @@
 
   <!-- SCREEN 1: SERVICE -->
   <section class="screen visible" id="screen-service">
-    <h2 class="step-title">×××× ×××¤×× ×ª×¨×¦× ××§×××¢?</h2>
+    <h2 class="step-title">איזה טיפול תרצי לקבוע?</h2>
     <div class="service-grid">
       <div class="service-card" data-service="hands" data-duration="1">
-        <div class="service-icon">ð</div>
-        <div class="service-text"><strong>×××××</strong><span>×-60 ××§××ª</span></div>
+        <div class="service-icon">💅</div>
+        <div class="service-text"><strong>ידיים</strong><span>כ-60 דקות</span></div>
       </div>
       <div class="service-card" data-service="feet" data-duration="1">
-        <div class="service-icon">ð¦¶</div>
-        <div class="service-text"><strong>×¨×××××</strong><span>×-60 ××§××ª</span></div>
+        <div class="service-icon">🦶</div>
+        <div class="service-text"><strong>רגליים</strong><span>כ-60 דקות</span></div>
       </div>
       <div class="service-card" data-service="both" data-duration="2">
-        <div class="service-icon">â¨</div>
-        <div class="service-text"><strong>××××× + ×¨×××××</strong><span>×-120 ××§××ª</span></div>
+        <div class="service-icon">✨</div>
+        <div class="service-text"><strong>ידיים + רגליים</strong><span>כ-120 דקות</span></div>
       </div>
     </div>
   </section>
 
   <!-- SCREEN 2: DATE + TIME -->
   <section class="screen" id="screen-datetime">
-    <h2 class="step-title">×××¨× ××× ××©×¢×</h2>
+    <h2 class="step-title">בחרי יום ושעה</h2>
 
     <div class="cal-wrap">
       <div class="cal-nav">
-        <!-- RTL: right arrow (âº) = next month, left arrow (â¹) = prev month -->
         <button class="cal-arrow" id="calNext">&#8250;</button>
         <span class="cal-month-label" id="calMonthLabel"></span>
         <button class="cal-arrow" id="calPrev">&#8249;</button>
       </div>
       <div class="cal-grid" id="calGrid">
-        <!-- DOW headers: SunâSat, in RTL grid Sun appears on the right -->
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow" style="color:#e0c0c8">××³</div>
-        <div class="cal-dow" style="color:#e0c0c8">×©×³</div>
-        <!-- Day cells injected by JS below the headers -->
+        <div class="cal-dow">א׳</div>
+        <div class="cal-dow">ב׳</div>
+        <div class="cal-dow">ג׳</div>
+        <div class="cal-dow">ד׳</div>
+        <div class="cal-dow">ה׳</div>
+        <div class="cal-dow" style="color:#e0c0c8">ו׳</div>
+        <div class="cal-dow" style="color:#e0c0c8">ש׳</div>
       </div>
       <div class="holiday-label" id="holidayLabel"></div>
     </div>
 
     <div id="slotsArea"></div>
-    <button class="btn-back" id="backToService">×××¨×</button>
+    <button class="btn-back" id="backToService">חזרה</button>
   </section>
 
   <!-- SCREEN 3: DETAILS -->
   <section class="screen" id="screen-details">
-    <h2 class="step-title">×¤×¨××× ×××¨×× ××</h2>
+    <h2 class="step-title">פרטים אחרונים</h2>
     <div class="summary-box" id="summaryBox"></div>
-    <label for="fullname">×©× ×××</label>
-    <input type="text" id="fullname" placeholder="×©× ×¤×¨×× ××©× ××©×¤××">
-    <label for="phone">××¡×¤×¨ ×××¤×× / ×××××¡××¤</label>
+    <label for="fullname">שם מלא</label>
+    <input type="text" id="fullname" placeholder="שם פרטי ושם משפחה">
+    <label for="phone">מספר טלפון / וואטסאפ</label>
     <input type="tel" id="phone" placeholder="050-1234567" inputmode="tel">
-    <label for="note">××¢×¨× (××××)</label>
-    <textarea id="note" placeholder="××××××: ×¨×××©××ª ××¦××¤××¨× ×××, ×××× ×××¢××£ ××××³"></textarea>
-    <button class="btn-primary" id="confirmBtn" disabled>×××©××¨ ×××× ×</button>
-    <button class="btn-back" id="backToDate">×××¨×</button>
+    <label for="note">הערה (חובה)</label>
+    <textarea id="note" placeholder="לדוגמה: רגישות בציפורניים, גוון מועדף וכו׳"></textarea>
+    <button class="btn-primary" id="confirmBtn" disabled>אישור הזמנה</button>
+    <button class="btn-back" id="backToDate">חזרה</button>
   </section>
 
   <!-- SCREEN 4: CONFIRMATION -->
   <section class="screen" id="screen-confirm">
     <div class="confirm-wrap">
-      <div class="confirm-icon">â</div>
-      <div class="confirm-title">××××× × ×××¦×¢× ×××¦×××!</div>
-      <div class="confirm-sub">× × ××©×××¨ ××ª ××¤×¨××× â ×× ×××©×× ×××©××¨ × ××¡×£</div>
+      <div class="confirm-icon">✓</div>
+      <div class="confirm-title">ההזמנה בוצעה בהצלחה!</div>
+      <div class="confirm-sub">נא לשמור את הפרטים — לא יישלח אישור נוסף</div>
       <div class="ticket" id="ticketBox"></div>
-      <div class="save-note">ð ×¨××× ×©××× ×¢×××× 18, ××¤×¨ ×¡××</div>
+      <div class="save-note">📍 רחוב שלום עליכם 18, כפר סבא</div>
     </div>
   </section>
 
 </div>
 
 <script>
-// ---------- MOCK DATA (replaced by Google Calendar via Make.com) ----------
-const HEBREW_DAYS         = ['×¨××©××','×©× ×','×©×××©×','×¨×××¢×','××××©×','×©××©×','×©××ª'];
-const HEBREW_MONTHS_SHORT = ['×× ××³','×¤××¨×³','××¨×¥','××¤×¨×³','×××','××× ×','××××','××××³','×¡×¤××³','×××§×³','× ×××³','××¦××³'];
-const HEBREW_MONTHS_FULL  = ['×× ×××¨','×¤××¨×××¨','××¨×¥','××¤×¨××','×××','××× ×','××××','×××××¡×','×¡×¤××××¨','×××§××××¨','× ×××××¨','××¦×××¨'];
+const HEBREW_DAYS         = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+const HEBREW_MONTHS_SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
+const HEBREW_MONTHS_FULL  = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
-const WORK_DAYS  = [0,1,2,3,4]; // SunâThu
-const WORK_HOURS = [8.5, 9.5, 10.5, 11.5, 12]; // 08:30â12:00
+const WORK_DAYS  = [0,1,2,3,4];
+const WORK_HOURS = [8.5, 9.5, 10.5, 11.5, 12];
 
-let BLOCKED_DAYS = []; // manually blocked by Orny, e.g. ['2026-06-25']
-let HOLIDAY_DAYS = new Map(); // date â Hebrew name, fetched from Hebcal
-const TAKEN_SLOTS  = {}; // e.g. { '2026-06-24': ['9.5','10.5'] }
+let BLOCKED_DAYS = [];
+let HOLIDAY_DAYS = new Map();
+const TAKEN_SLOTS  = {};
 
-// ââ Israeli holidays via Hebcal âââââââââââââââââââââââââââââââââââââââââââ
 async function fetchHolidays(){
   const year = new Date().getFullYear();
   try {
-    // Fetch current + next year so the calendar stays accurate near year end
     const fetches = [year, year + 1].map(y =>
       fetch(`https://www.hebcal.com/hebcal/?v=1&cfg=json&year=${y}&maj=on&min=off&mod=off&nx=off&ss=off&mf=on&c=off&geo=IL`)
         .then(r => r.json())
@@ -465,20 +457,17 @@ async function fetchHolidays(){
         if(item.date){
           const key  = item.date.slice(0, 10);
           const name = item.hebrew || item.title || '';
-          // Keep the first name if multiple holidays fall on the same day
           if(!HOLIDAY_DAYS.has(key)) HOLIDAY_DAYS.set(key, name);
         }
       });
     });
   } catch(e) {
-    // Graceful degradation â calendar works fine, holidays just won't be marked
     console.warn('Could not fetch Israeli holidays:', e);
   }
 }
 
 let state = { service:null, duration:1, date:null, dateLabel:null, time:null };
 
-// ââ Calendar ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 let calYear, calMonth;
 
 function initCalendar(){
@@ -498,15 +487,13 @@ function renderCalendar(){
   const isCurrentMonth = (calYear === today.getFullYear() && calMonth === today.getMonth());
   document.getElementById('calPrev').disabled = isCurrentMonth;
 
-  // Remove old day cells (keep the 7 DOW header divs at the top)
   const grid = document.getElementById('calGrid');
   grid.querySelectorAll('.cal-day').forEach(n => n.remove());
 
   const firstDay = new Date(calYear, calMonth, 1);
   const lastDay  = new Date(calYear, calMonth + 1, 0);
-  const startDow = firstDay.getDay(); // 0=Sunâ¦6=Sat
+  const startDow = firstDay.getDay();
 
-  // In RTL grid, position 0 (rightmost) = Sunday. Offset empty cells.
   for(let i = 0; i < startDow; i++){
     const empty = document.createElement('div');
     empty.className = 'cal-day';
@@ -530,9 +517,8 @@ function renderCalendar(){
     if(isPast || isWeekend || isBlocked){
       cell.classList.add('disabled');
     } else if(isHoliday){
-      cell.classList.add('holiday'); // grayed + gold dot
+      cell.classList.add('holiday');
       const holidayName = HOLIDAY_DAYS.get(key) || '';
-      // Show name in the label strip on hover (desktop) and tap (mobile)
       cell.addEventListener('mouseenter', () => showHolidayLabel(holidayName));
       cell.addEventListener('mouseleave', hideHolidayLabel);
       cell.addEventListener('touchstart', (e) => {
@@ -543,14 +529,12 @@ function renderCalendar(){
     } else {
       if(date.getTime() === today.getTime()) cell.classList.add('today');
       cell.classList.add('available');
-
-      if(state.date === key) cell.classList.add('selected'); // restore selection
-
+      if(state.date === key) cell.classList.add('selected');
       cell.addEventListener('click', () => {
         grid.querySelectorAll('.cal-day.selected').forEach(c => c.classList.remove('selected'));
         cell.classList.add('selected');
         state.date      = key;
-        state.dateLabel = `××× ${HEBREW_DAYS[dow]}, ${d} ×${HEBREW_MONTHS_SHORT[calMonth]}`;
+        state.dateLabel = `יום ${HEBREW_DAYS[dow]}, ${d} ב${HEBREW_MONTHS_SHORT[calMonth]}`;
         renderSlots(key);
       });
     }
@@ -579,26 +563,21 @@ function clearSlots(){
   state.time = null;
 }
 
-// ââ Time slots ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function renderSlots(dateKey){
   const area  = document.getElementById('slotsArea');
   const taken = TAKEN_SLOTS[dateKey] || [];
-
   const valid = WORK_HOURS.filter(start => start + state.duration <= 12.5);
-
   if(valid.length === 0){
-    area.innerHTML = '<div class="empty-note">××× ×©×¢××ª ×¤× ××××ª ×××× ××</div>';
+    area.innerHTML = '<div class="empty-note">אין שעות פנויות ביום זה</div>';
     return;
   }
-
-  let html = '<div class="slots-label">×××¨× ×©×¢×:</div><div class="slots-grid">';
+  let html = '<div class="slots-label">בחרי שעה:</div><div class="slots-grid">';
   valid.forEach(t => {
     const isTaken = taken.includes(String(t));
     html += `<div class="slot-btn${isTaken ? ' taken' : ''}" data-time="${t}">${hourLabel(t)}</div>`;
   });
   html += '</div>';
   area.innerHTML = html;
-
   area.querySelectorAll('.slot-btn:not(.taken)').forEach(btn => {
     btn.addEventListener('click', () => {
       area.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
@@ -609,17 +588,15 @@ function renderSlots(dateKey){
   });
 }
 
-// ââ Holiday label âââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function showHolidayLabel(name){
   const el = document.getElementById('holidayLabel');
-  el.textContent = name ? `â¡ ${name}` : '';
+  el.textContent = name ? `✡ ${name}` : '';
   el.classList.add('visible');
 }
 function hideHolidayLabel(){
   document.getElementById('holidayLabel').classList.remove('visible');
 }
 
-// ââ Helpers âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function hourLabel(t){
   const h = Math.floor(t);
   const m = (t % 1) === 0.5 ? '30' : '00';
@@ -628,8 +605,7 @@ function hourLabel(t){
 function endTimeLabel(start, dur){ return hourLabel(parseFloat(start) + dur); }
 function fmtKey(date){ return date.toISOString().slice(0,10); }
 
-// ââ Service selection âââââââââââââââââââââââââââââââââââââââââââââââââââââ
-const serviceNames = { hands:'×××××', feet:'×¨×××××', both:'××××× + ×¨×××××' };
+const serviceNames = { hands:'ידיים', feet:'רגליים', both:'ידיים + רגליים' };
 
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -644,10 +620,9 @@ document.querySelectorAll('.service-card').forEach(card => {
 document.getElementById('backToService').addEventListener('click', () => goToScreen('service'));
 document.getElementById('backToDate').addEventListener('click',    () => goToScreen('datetime'));
 
-// ââ Details form ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
 function updateSummary(){
   document.getElementById('summaryBox').innerHTML =
-    `<b>${serviceNames[state.service]}</b> Â· ${state.dateLabel} Â· ${hourLabel(state.time)}â${endTimeLabel(state.time, state.duration)}`;
+    `<b>${serviceNames[state.service]}</b> · ${state.dateLabel} · ${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}`;
 }
 
 const phoneInput    = document.getElementById('phone');
@@ -676,8 +651,6 @@ function normalizePhone(raw){
 
 confirmBtn.addEventListener('click', () => {
   const normalized = normalizePhone(phoneInput.value);
-
-  // Send booking to Make.com
   fetch('https://hook.eu1.make.com/96xkf79ra8h58mh2ry7l5evzirtmepjn', {
     method: 'POST',
     mode: 'no-cors',
@@ -693,18 +666,16 @@ confirmBtn.addEventListener('click', () => {
       note: noteInput.value.trim()
     })
   }).catch(e => console.warn('Webhook error:', e));
-
   document.getElementById('ticketBox').innerHTML = `
-    <div class="ticket-row"><span class="lbl">×©×</span><span class="val">${fullnameInput.value.trim()}</span></div>
-    <div class="ticket-row"><span class="lbl">×××¤××</span><span class="val">${serviceNames[state.service]}</span></div>
-    <div class="ticket-row"><span class="lbl">×ª××¨××</span><span class="val">${state.dateLabel}</span></div>
-    <div class="ticket-row"><span class="lbl">×©×¢×</span><span class="val">${hourLabel(state.time)}â${endTimeLabel(state.time, state.duration)}</span></div>
-    <div class="ticket-row"><span class="lbl">×××¤××</span><span class="val">${normalized}</span></div>
+    <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
+    <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
+    <div class="ticket-row"><span class="lbl">תאריך</span><span class="val">${state.dateLabel}</span></div>
+    <div class="ticket-row"><span class="lbl">שעה</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
+    <div class="ticket-row"><span class="lbl">טלפון</span><span class="val">${normalized}</span></div>
   `;
   goToScreen('confirm');
 });
 
-// ââ Screen navigation âââââââââââââââââââââââââââââââââââââââââââââââââââââ
 const screenOrder = ['service','datetime','details','confirm'];
 
 function goToScreen(name){
@@ -715,13 +686,12 @@ function goToScreen(name){
   document.querySelectorAll('#progressDots .dot').forEach((d,i) => {
     d.classList.toggle('active', i <= idx);
   });
-  if(name === 'datetime') initCalendar(); // holidays already in HOLIDAY_DAYS by this point
+  if(name === 'datetime') initCalendar();
   if(name === 'details'){ updateSummary(); validateForm(); }
   window.scrollTo(0,0);
 }
 
-// ââ Startup: fetch holidays then the app is ready âââââââââââââââââââââââââ
-fetchHolidays(); // fires in background; calendar renders when user reaches screen 2
+fetchHolidays();
 </script>
 </body>
 </html>
