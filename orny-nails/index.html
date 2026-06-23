@@ -651,20 +651,21 @@ function normalizePhone(raw){
 
 confirmBtn.addEventListener('click', () => {
   const normalized = normalizePhone(phoneInput.value);
-  const _p = new URLSearchParams({
-    name: fullnameInput.value.trim(),
-    phone: normalized,
-    service: state.service,
-    date: state.date,
-    dateLabel: state.dateLabel,
-    time: parseFloat(state.time),
-    duration: state.duration,
-    note: noteInput.value.trim()
-  });
-  fetch('https://script.google.com/macros/s/AKfycbxZ55CurLoMjzeevBGet674Qjug9VtTPPGJGGqWlUXW54I9GlGqu8Y47nS8hWngbAfO8g/exec?' + _p.toString(), {
-    method: 'GET',
-    mode: 'no-cors'
-  }).catch(e => console.warn('Webhook error:', e));
+  fetch('https://hook.eu1.make.com/96xkf79ra8h58mh2ry7l5evzirtmepjn', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({
+          name: fullnameInput.value.trim(),
+          phone: normalized,
+          service: state.service,
+          date: state.date,
+          dateLabel: state.dateLabel,
+          time: parseFloat(state.time),
+          duration: state.duration,
+          note: noteInput.value.trim()
+        })
+      }).catch(e => console.warn('Webhook error:', e));
   document.getElementById('ticketBox').innerHTML = `
     <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
     <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
