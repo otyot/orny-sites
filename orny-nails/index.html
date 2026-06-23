@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
-<title>×§×××¢×ª ×ª××¨ | Orny Nails</title>
+<title>קביעת תור | Orny Nails</title>
 <style>
   :root{
     --cream:#FBF3EE;
@@ -82,7 +82,7 @@
     text-align:center;
   }
 
-  /* ââ Service cards ââ */
+  /* ── Service cards ── */
   .service-grid{display:flex;flex-direction:column;gap:14px;}
   .service-card{
     border:2px solid var(--line);
@@ -111,7 +111,7 @@
   .service-text strong{display:block;font-size:17px;}
   .service-text span{font-size:13px;color:var(--ink-soft);}
 
-  /* ââ Calendar ââ */
+  /* ── Calendar ── */
   .cal-wrap{
     background:#fff;
     border-radius:18px;
@@ -354,7 +354,7 @@
 
   <header class="top">
     <p class="brand">Orny Nails</p>
-    <p class="brand-sub">×§×××¢×ª ×ª××¨</p>
+    <p class="brand-sub">קביעת תור</p>
     <div class="progress" id="progressDots">
       <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
     </div>
@@ -362,26 +362,26 @@
 
   <!-- SCREEN 1: SERVICE -->
   <section class="screen visible" id="screen-service">
-    <h2 class="step-title">×××× ×××¤×× ×ª×¨×¦× ××§×××¢?</h2>
+    <h2 class="step-title">איזה טיפול תרצי לקבוע?</h2>
     <div class="service-grid">
       <div class="service-card" data-service="hands" data-duration="1">
-        <div class="service-icon">ð</div>
-        <div class="service-text"><strong>×××××</strong><span>×-60 ××§××ª</span></div>
+        <div class="service-icon">💅</div>
+        <div class="service-text"><strong>ידיים</strong><span>כ-60 דקות</span></div>
       </div>
       <div class="service-card" data-service="feet" data-duration="1">
-        <div class="service-icon">ð¦¶</div>
-        <div class="service-text"><strong>×¨×××××</strong><span>×-60 ××§××ª</span></div>
+        <div class="service-icon">🦶</div>
+        <div class="service-text"><strong>רגליים</strong><span>כ-60 דקות</span></div>
       </div>
       <div class="service-card" data-service="both" data-duration="2">
-        <div class="service-icon">â¨</div>
-        <div class="service-text"><strong>××××× + ×¨×××××</strong><span>×-120 ××§××ª</span></div>
+        <div class="service-icon">✨</div>
+        <div class="service-text"><strong>ידיים + רגליים</strong><span>כ-120 דקות</span></div>
       </div>
     </div>
   </section>
 
   <!-- SCREEN 2: DATE + TIME -->
   <section class="screen" id="screen-datetime">
-    <h2 class="step-title">×××¨× ××× ××©×¢×</h2>
+    <h2 class="step-title">בחרי יום ושעה</h2>
 
     <div class="cal-wrap">
       <div class="cal-nav">
@@ -390,52 +390,52 @@
         <button class="cal-arrow" id="calPrev">&#8249;</button>
       </div>
       <div class="cal-grid" id="calGrid">
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow">××³</div>
-        <div class="cal-dow" style="color:#e0c0c8">××³</div>
-        <div class="cal-dow" style="color:#e0c0c8">×©×³</div>
+        <div class="cal-dow">א׳</div>
+        <div class="cal-dow">ב׳</div>
+        <div class="cal-dow">ג׳</div>
+        <div class="cal-dow">ד׳</div>
+        <div class="cal-dow">ה׳</div>
+        <div class="cal-dow" style="color:#e0c0c8">ו׳</div>
+        <div class="cal-dow" style="color:#e0c0c8">ש׳</div>
       </div>
       <div class="holiday-label" id="holidayLabel"></div>
     </div>
 
     <div id="slotsArea"></div>
-    <button class="btn-back" id="backToService">×××¨×</button>
+    <button class="btn-back" id="backToService">חזרה</button>
   </section>
 
   <!-- SCREEN 3: DETAILS -->
   <section class="screen" id="screen-details">
-    <h2 class="step-title">×¤×¨××× ×××¨×× ××</h2>
+    <h2 class="step-title">פרטים אחרונים</h2>
     <div class="summary-box" id="summaryBox"></div>
-    <label for="fullname">×©× ×××</label>
-    <input type="text" id="fullname" placeholder="×©× ×¤×¨×× ××©× ××©×¤××">
-    <label for="phone">××¡×¤×¨ ×××¤×× / ×××××¡××¤</label>
+    <label for="fullname">שם מלא</label>
+    <input type="text" id="fullname" placeholder="שם פרטי ושם משפחה">
+    <label for="phone">מספר טלפון / וואטסאפ</label>
     <input type="tel" id="phone" placeholder="050-1234567" inputmode="tel">
-    <label for="note">××¢×¨× (××××)</label>
-    <textarea id="note" placeholder="××××××: ×¨×××©××ª ××¦××¤××¨× ×××, ×××× ×××¢××£ ××××³"></textarea>
-    <button class="btn-primary" id="confirmBtn" disabled>×××©××¨ ×××× ×</button>
-    <button class="btn-back" id="backToDate">×××¨×</button>
+    <label for="note">הערה (חובה)</label>
+    <textarea id="note" placeholder="לדוגמה: רגישות בציפורניים, גוון מועדף וכו׳"></textarea>
+    <button class="btn-primary" id="confirmBtn" disabled>אישור הזמנה</button>
+    <button class="btn-back" id="backToDate">חזרה</button>
   </section>
 
   <!-- SCREEN 4: CONFIRMATION -->
   <section class="screen" id="screen-confirm">
     <div class="confirm-wrap">
-      <div class="confirm-icon">â</div>
-      <div class="confirm-title">××××× × ×××¦×¢× ×××¦×××!</div>
-      <div class="confirm-sub">× × ××©×××¨ ××ª ××¤×¨××× â ×× ×××©×× ×××©××¨ × ××¡×£</div>
+      <div class="confirm-icon">✓</div>
+      <div class="confirm-title">ההזמנה בוצעה בהצלחה!</div>
+      <div class="confirm-sub">נא לשמור את הפרטים — לא יישלח אישור נוסף</div>
       <div class="ticket" id="ticketBox"></div>
-      <div class="save-note">ð ×¨××× ×©××× ×¢×××× 18, ××¤×¨ ×¡××</div>
+      <div class="save-note">📍 רחוב שלום עליכם 18, כפר סבא</div>
     </div>
   </section>
 
 </div>
 
 <script>
-const HEBREW_DAYS         = ['×¨××©××','×©× ×','×©×××©×','×¨×××¢×','××××©×','×©××©×','×©××ª'];
-const HEBREW_MONTHS_SHORT = ['×× ××³','×¤××¨×³','××¨×¥','××¤×¨×³','×××','××× ×','××××','××××³','×¡×¤××³','×××§×³','× ×××³','××¦××³'];
-const HEBREW_MONTHS_FULL  = ['×× ×××¨','×¤××¨×××¨','××¨×¥','××¤×¨××','×××','××× ×','××××','×××××¡×','×¡×¤××××¨','×××§××××¨','× ×××××¨','××¦×××¨'];
+const HEBREW_DAYS         = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+const HEBREW_MONTHS_SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
+const HEBREW_MONTHS_FULL  = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
 const WORK_DAYS  = [0,1,2,3,4];
 const WORK_HOURS = [8.5, 9.5, 10.5, 11.5, 12];
@@ -534,7 +534,7 @@ function renderCalendar(){
         grid.querySelectorAll('.cal-day.selected').forEach(c => c.classList.remove('selected'));
         cell.classList.add('selected');
         state.date      = key;
-        state.dateLabel = `××× ${HEBREW_DAYS[dow]}, ${d} ×${HEBREW_MONTHS_SHORT[calMonth]}`;
+        state.dateLabel = `יום ${HEBREW_DAYS[dow]}, ${d} ב${HEBREW_MONTHS_SHORT[calMonth]}`;
         renderSlots(key);
       });
     }
@@ -568,10 +568,10 @@ function renderSlots(dateKey){
   const taken = TAKEN_SLOTS[dateKey] || [];
   const valid = WORK_HOURS.filter(start => start + state.duration <= 12.5);
   if(valid.length === 0){
-    area.innerHTML = '<div class="empty-note">××× ×©×¢××ª ×¤× ××××ª ×××× ××</div>';
+    area.innerHTML = '<div class="empty-note">אין שעות פנויות ביום זה</div>';
     return;
   }
-  let html = '<div class="slots-label">×××¨× ×©×¢×:</div><div class="slots-grid">';
+  let html = '<div class="slots-label">בחרי שעה:</div><div class="slots-grid">';
   valid.forEach(t => {
     const isTaken = taken.includes(String(t));
     html += `<div class="slot-btn${isTaken ? ' taken' : ''}" data-time="${t}">${hourLabel(t)}</div>`;
@@ -590,7 +590,7 @@ function renderSlots(dateKey){
 
 function showHolidayLabel(name){
   const el = document.getElementById('holidayLabel');
-  el.textContent = name ? `â¡ ${name}` : '';
+  el.textContent = name ? `✡ ${name}` : '';
   el.classList.add('visible');
 }
 function hideHolidayLabel(){
@@ -605,7 +605,7 @@ function hourLabel(t){
 function endTimeLabel(start, dur){ return hourLabel(parseFloat(start) + dur); }
 function fmtKey(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}-${m}-${d}`; }
 
-const serviceNames = { hands:'×××××', feet:'×¨×××××', both:'××××× + ×¨×××××' };
+const serviceNames = { hands:'ידיים', feet:'רגליים', both:'ידיים + רגליים' };
 
 document.querySelectorAll('.service-card').forEach(card => {
   card.addEventListener('click', () => {
@@ -622,7 +622,7 @@ document.getElementById('backToDate').addEventListener('click',    () => goToScr
 
 function updateSummary(){
   document.getElementById('summaryBox').innerHTML =
-    `<b>${serviceNames[state.service]}</b> Â· ${state.dateLabel} Â· ${hourLabel(state.time)}â${endTimeLabel(state.time, state.duration)}`;
+    `<b>${serviceNames[state.service]}</b> · ${state.dateLabel} · ${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}`;
 }
 
 const phoneInput    = document.getElementById('phone');
@@ -667,11 +667,11 @@ confirmBtn.addEventListener('click', () => {
     })
   }).catch(e => console.warn('Webhook error:', e));
   document.getElementById('ticketBox').innerHTML = `
-    <div class="ticket-row"><span class="lbl">×©×</span><span class="val">${fullnameInput.value.trim()}</span></div>
-    <div class="ticket-row"><span class="lbl">×××¤××</span><span class="val">${serviceNames[state.service]}</span></div>
-    <div class="ticket-row"><span class="lbl">×ª××¨××</span><span class="val">${state.dateLabel}</span></div>
-    <div class="ticket-row"><span class="lbl">×©×¢×</span><span class="val">${hourLabel(state.time)}â${endTimeLabel(state.time, state.duration)}</span></div>
-    <div class="ticket-row"><span class="lbl">×××¤××</span><span class="val">${normalized}</span></div>
+    <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
+    <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
+    <div class="ticket-row"><span class="lbl">תאריך</span><span class="val">${state.dateLabel}</span></div>
+    <div class="ticket-row"><span class="lbl">שעה</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
+    <div class="ticket-row"><span class="lbl">טלפון</span><span class="val">${normalized}</span></div>
   `;
   goToScreen('confirm');
 });
