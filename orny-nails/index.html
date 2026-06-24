@@ -266,7 +266,7 @@
     background:#fff;
     color:var(--ink);
     outline:none;
-    transition:.15s;
+    transition:.15px;
   }
   input[type=text]:focus, input[type=tel]:focus, textarea:focus{
     border-color:var(--rose);
@@ -433,6 +433,9 @@
 </div>
 
 <script>
+// ── WEBHOOK URL ──
+const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwBAhyG_jsgqFImM0XJhfv5JfrCpgfdQnIYuFvLFFd6EFobp2t5McxaE77GAVUMFSKn/exec';
+
 const HEBREW_DAYS         = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const HEBREW_MONTHS_SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
 const HEBREW_MONTHS_FULL  = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
@@ -582,7 +585,7 @@ function renderSlots(dateKey){
     btn.addEventListener('click', () => {
       area.querySelectorAll('.slot-btn').forEach(b => b.classList.remove('selected'));
       btn.classList.add('selected');
-      state.time = parseFloat(btn.dataset.time);
+      state.time = btn.dataset.time;
       goToScreen('details');
     });
   });
@@ -603,7 +606,7 @@ function hourLabel(t){
   return `${String(h).padStart(2,'0')}:${m}`;
 }
 function endTimeLabel(start, dur){ return hourLabel(parseFloat(start) + dur); }
-function fmtKey(date){ const y=date.getFullYear(); const m=String(date.getMonth()+1).padStart(2,'0'); const d=String(date.getDate()).padStart(2,'0'); return `${y}-${m}-${d}`; }
+function fmtKey(date){ return date.toISOString().slice(0,10); }
 
 const serviceNames = { hands:'ידיים', feet:'רגליים', both:'ידיים + רגליים' };
 
@@ -651,21 +654,21 @@ function normalizePhone(raw){
 
 confirmBtn.addEventListener('click', () => {
   const normalized = normalizePhone(phoneInput.value);
-  fetch('https://hook.eu1.make.com/96xkf79ra8h58mh2ry7l5evzirtmepjn', {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'text/plain' },
-        body: JSON.stringify({
-          name: fullnameInput.value.trim(),
-          phone: normalized,
-          service: state.service,
-          date: state.date,
-          dateLabel: state.dateLabel,
-          time: parseFloat(state.time),
-          duration: state.duration,
-          note: noteInput.value.trim()
-        })
-      }).catch(e => console.warn('Webhook error:', e));
+  fetch(GAS_WEBHOOK_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain' },
+    body: JSON.stringify({
+      name:      fullnameInput.value.trim(),
+      phone:     normalized,
+      service:   state.service,
+      date:      state.date,
+      dateLabel: state.dateLabel,
+      time:      state.time,
+      duration:  state.duration,
+      note:      noteInput.value.trim()
+    })
+  }).catch(e => console.warn('Webhook error:', e));
   document.getElementById('ticketBox').innerHTML = `
     <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
     <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
