@@ -612,7 +612,12 @@ function hourLabel(t){
   return `${String(h).padStart(2,'0')}:${m}`;
 }
 function endTimeLabel(start, dur){ return hourLabel(parseFloat(start) + dur); }
-function fmtKey(date){ return date.toISOString().slice(0,10); }
+function fmtKey(date){
+  const y = date.getFullYear();
+  const m = String(date.getMonth()+1).padStart(2,'0');
+  const d = String(date.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+d;
+}
 
 const serviceNames = { hands:'ידיים', feet:'רגליים', both:'ידיים + רגליים' };
 
