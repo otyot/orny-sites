@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;600;700&display=swap" rel="stylesheet">
 <title>קביעת תור | Orny Nails</title>
 <meta property="og:title" content="Orny Nails | קביעת תור">
 <meta property="og:description" content="קבעי תור לטיפול מניקור ופדיקור – כפר סבא">
@@ -14,457 +14,361 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <style>
-  :root{
-    --cream:#FBF3EE;
-    --rose:#C8456B;
-    --rose-deep:#9A2F4F;
-    --rose-soft:#F3D9E1;
-    --ink:#3A2A2E;
-    --ink-soft:#8A7378;
-    --gold:#C9A24B;
-    --line:#E8D7CE;
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0;
-    background:var(--cream);
-    font-family:'Heebo','Arial Hebrew','Segoe UI',sans-serif;
-    color:var(--ink);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-  }
-  .app{
-    width:100%;
-    max-width:480px;
-    min-height:100vh;
-    background:var(--cream);
-    position:relative;
-    padding-bottom:40px;
-  }
-  header.top{
-    padding:28px 24px 18px;
-    text-align:center;
-  }
-  .brand{
-    font-family:'Georgia','Times New Roman',serif;
-    font-size:28px;
-    letter-spacing:0.5px;
-    color:var(--rose-deep);
-    margin:0;
-  }
-  .brand-sub{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin-top:4px;
-    letter-spacing:1px;
-  }
-  .progress{
-    display:flex;
-    justify-content:center;
-    gap:8px;
-    margin:18px 0 6px;
-  }
-  .dot{
-    width:7px;height:7px;border-radius:50%;
-    background:var(--line);
-    transition:.3s;
-  }
-  .dot.active{background:var(--rose);width:22px;border-radius:4px;}
+:root{
+--cream:#FBF3EE;
+--rose:#C8456B;
+--rose-deep:#9A2F4F;
+--rose-soft:#F3D9E1;
+--ink:#3A2A2E;
+--ink-soft:#8A7378;
+--gold:#C9A24B;
+--line:#E8D7CE;
+}
+*{box-sizing:border-box;}
+body{
+margin:0;
+background:var(--cream);
+font-family:'Heebo','Arial Hebrew','Segoe UI',sans-serif;
+color:var(--ink);
+min-height:100vh;
+display:flex;
+justify-content:center;
+}
+.app{
+width:100%;
+max-width:480px;
+min-height:100vh;
+background:var(--cream);
+position:relative;
+padding-bottom:40px;
+}
+header.top{
+padding:28px 24px 18px;
+text-align:center;
+}
+.brand{
+font-family:'Georgia','Times New Roman',serif;
+font-size:28px;
+letter-spacing:0.5px;
+color:var(--rose-deep);
+margin:0;
+}
+.brand-sub{
+font-size:13px;
+color:var(--ink-soft);
+margin-top:4px;
+letter-spacing:1px;
+}
+.progress{
+display:flex;
+justify-content:center;
+gap:8px;
+margin:18px 0 6px;
+}
+.dot{
+width:7px;height:7px;border-radius:50%;
+background:var(--line);
+transition:.3s;
+}
+.dot.active{background:var(--rose);width:22px;border-radius:4px;}
 
-  .screen{
-    padding:8px 24px 24px;
-    display:none;
-    animation:fadeIn .35s ease;
-  }
-  .screen.visible{display:block;}
-  @keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.screen{
+padding:8px 24px 24px;
+display:none;
+animation:fadeIn .35s ease;
+}
+.screen.visible{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
 
-  h2.step-title{
-    font-family:'Georgia',serif;
-    font-size:21px;
-    color:var(--ink);
-    margin:6px 0 22px;
-    text-align:center;
-  }
+h2.step-title{
+font-family:'Georgia',serif;
+font-size:21px;
+color:var(--ink);
+margin:6px 0 22px;
+text-align:center;
+}
 
-  /* ── Service cards ── */
-  .service-grid{display:flex;flex-direction:column;gap:14px;}
-  .service-card{
-    border:2px solid var(--line);
-    background:#fff;
-    border-radius:18px;
-    padding:18px 20px;
-    display:flex;
-    align-items:center;
-    gap:16px;
-    cursor:pointer;
-    transition:.2s;
-  }
-  .service-card:active{transform:scale(0.98);}
-  .service-card.selected{
-    border-color:var(--rose);
-    background:var(--rose-soft);
-  }
-  .service-icon{
-    font-size:28px;
-    width:46px;height:46px;
-    border-radius:50%;
-    background:var(--cream);
-    display:flex;align-items:center;justify-content:center;
-    flex-shrink:0;
-  }
-  .service-text strong{display:block;font-size:17px;}
-  .service-text span{font-size:13px;color:var(--ink-soft);}
+.service-grid{display:flex;flex-direction:column;gap:14px;}
+.service-card{
+border:2px solid var(--line);
+background:#fff;
+border-radius:18px;
+padding:18px 20px;
+display:flex;
+align-items:center;
+gap:16px;
+cursor:pointer;
+transition:.2s;
+}
+.service-card:active{transform:scale(0.98);}
+.service-card.selected{
+border-color:var(--rose);
+background:var(--rose-soft);
+}
+.service-icon{
+font-size:28px;
+width:46px;height:46px;
+border-radius:50%;
+background:var(--cream);
+display:flex;align-items:center;justify-content:center;
+flex-shrink:0;
+}
+.service-text strong{display:block;font-size:17px;}
+.service-text span{font-size:13px;color:var(--ink-soft);}
 
-  /* ── Calendar ── */
-  .cal-wrap{
-    background:#fff;
-    border-radius:18px;
-    border:1.5px solid var(--line);
-    padding:16px 14px;
-    margin-bottom:16px;
-  }
-  .cal-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:14px;
-  }
-  .cal-month-label{
-    font-family:'Georgia',serif;
-    font-size:17px;
-    color:var(--ink);
-  }
-  .cal-arrow{
-    background:none;
-    border:1.5px solid var(--line);
-    border-radius:50%;
-    width:36px;height:36px;
-    font-size:20px;
-    line-height:1;
-    cursor:pointer;
-    color:var(--ink-soft);
-    display:flex;align-items:center;justify-content:center;
-    transition:.15s;
-    padding:0;
-  }
-  .cal-arrow:disabled{opacity:.25;cursor:not-allowed;}
-  .cal-arrow:active:not(:disabled){background:var(--rose-soft);}
+.cal-wrap{
+background:#fff;
+border-radius:18px;
+border:1.5px solid var(--line);
+padding:16px 14px;
+margin-bottom:16px;
+}
+.cal-nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:14px;
+}
+.cal-month-label{
+font-family:'Georgia',serif;
+font-size:17px;
+color:var(--ink);
+}
+.cal-arrow{
+background:none;
+border:1.5px solid var(--line);
+border-radius:50%;
+width:36px;height:36px;
+font-size:20px;
+line-height:1;
+cursor:pointer;
+color:var(--ink-soft);
+display:flex;align-items:center;justify-content:center;
+transition:.15s;
+padding:0;
+}
+.cal-arrow:disabled{opacity:.25;cursor:not-allowed;}
+.cal-arrow:active:not(:disabled){background:var(--rose-soft);}
 
-  .cal-grid{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:3px;
-  }
-  .cal-dow{
-    text-align:center;
-    font-size:12px;
-    color:var(--ink-soft);
-    padding:2px 0 8px;
-    font-weight:600;
-  }
-  .cal-day{
-    aspect-ratio:1;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    border-radius:50%;
-    font-size:14px;
-    cursor:pointer;
-    transition:.15s;
-    border:none;
-    background:none;
-    color:var(--ink);
-    -webkit-tap-highlight-color:transparent;
-  }
-  .cal-day.today{
-    font-weight:bold;
-    color:var(--rose-deep);
-  }
-  .cal-day.available:hover{
-    background:var(--rose-soft);
-  }
-  .cal-day.available:active{
-    transform:scale(0.88);
-  }
-  .cal-day.disabled{
-    color:#D9CBCC;
-    cursor:default;
-    pointer-events:none;
-  }
-  .cal-day.holiday{
-    color:#D9CBCC;
-    cursor:default;
-    position:relative;
-  }
-  .cal-day.holiday::after{
-    content:'';
-    position:absolute;
-    bottom:3px;
-    left:50%;
-    transform:translateX(-50%);
-    width:4px;height:4px;
-    border-radius:50%;
-    background:var(--gold);
-  }
-  .holiday-label{
-    min-height:20px;
-    margin-top:10px;
-    text-align:center;
-    font-size:12px;
-    color:var(--gold);
-    letter-spacing:0.3px;
-    opacity:0;
-    transition:opacity .15s;
-  }
-  .holiday-label.visible{ opacity:1; }
-  .cal-day.selected{
-    background:var(--rose) !important;
-    color:#fff !important;
-    font-weight:bold;
-  }
+.cal-grid{
+display:grid;
+grid-template-columns:repeat(7,1fr);
+gap:3px;
+}
+.cal-dow{
+text-align:center;
+font-size:12px;
+color:var(--ink-soft);
+padding:2px 0 8px;
+font-weight:600;
+}
+.cal-day{
+aspect-ratio:1;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-size:14px;
+cursor:pointer;
+transition:.15s;
+border:none;
+background:none;
+color:var(--ink);
+-webkit-tap-highlight-color:transparent;
+}
+.cal-day.today{font-weight:bold;color:var(--rose-deep);}
+.cal-day.available:hover{background:var(--rose-soft);}
+.cal-day.available:active{transform:scale(0.88);}
+.cal-day.disabled{color:#D9CBCC;cursor:default;pointer-events:none;}
+.cal-day.holiday{color:#D9CBCC;cursor:default;position:relative;}
+.cal-day.holiday::after{
+content:'';position:absolute;bottom:3px;left:50%;transform:translateX(-50%);
+width:4px;height:4px;border-radius:50%;background:var(--gold);
+}
+.holiday-label{
+min-height:20px;margin-top:10px;text-align:center;font-size:12px;
+color:var(--gold);letter-spacing:0.3px;opacity:0;transition:opacity .15s;
+}
+.holiday-label.visible{opacity:1;}
+.cal-day.selected{background:var(--rose) !important;color:#fff !important;font-weight:bold;}
 
-  .slots-label{
-    font-size:13px;
-    color:var(--ink-soft);
-    margin-bottom:10px;
-  }
-  .slots-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:10px;
-    margin-top:6px;
-  }
-  .slot-btn{
-    border:2px solid var(--line);
-    background:#fff;
-    border-radius:12px;
-    padding:14px 4px;
-    font-size:15px;
-    cursor:pointer;
-    text-align:center;
-    transition:.15s;
-  }
-  .slot-btn.selected{border-color:var(--rose);background:var(--rose-soft);color:var(--rose-deep);font-weight:bold;}
-  .slot-btn.taken{opacity:.3;pointer-events:none;text-decoration:line-through;}
+.slots-label{font-size:13px;color:var(--ink-soft);margin-bottom:10px;}
+.slots-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px;}
+.slot-btn{
+border:2px solid var(--line);background:#fff;border-radius:12px;
+padding:14px 4px;font-size:15px;cursor:pointer;text-align:center;transition:.15s;
+}
+.slot-btn.selected{border-color:var(--rose);background:var(--rose-soft);color:var(--rose-deep);font-weight:bold;}
+.slot-btn.taken{opacity:.3;pointer-events:none;text-decoration:line-through;}
+.empty-note{text-align:center;color:var(--ink-soft);font-size:14px;padding:30px 10px;}
 
-  .empty-note{
-    text-align:center;
-    color:var(--ink-soft);
-    font-size:14px;
-    padding:30px 10px;
-  }
+label{display:block;font-size:14px;color:var(--ink-soft);margin:18px 0 6px;}
+input[type=text], input[type=tel], textarea{
+width:100%;border:2px solid var(--line);border-radius:12px;
+padding:13px 14px;font-size:16px;font-family:inherit;background:#fff;
+color:var(--ink);outline:none;transition:.15px;
+}
+input[type=text]:focus, input[type=tel]:focus, textarea:focus{border-color:var(--rose);}
+textarea{resize:none;height:90px;}
+input::placeholder, textarea::placeholder{color:#C7B8B4;}
+.summary-box{
+background:#fff;border:1.5px dashed var(--line);border-radius:14px;
+padding:14px 16px;font-size:14px;margin-bottom:6px;
+}
+.summary-box b{color:var(--rose-deep);}
 
-  label{
-    display:block;
-    font-size:14px;
-    color:var(--ink-soft);
-    margin:18px 0 6px;
-  }
-  input[type=text], input[type=tel], textarea{
-    width:100%;
-    border:2px solid var(--line);
-    border-radius:12px;
-    padding:13px 14px;
-    font-size:16px;
-    font-family:inherit;
-    background:#fff;
-    color:var(--ink);
-    outline:none;
-    transition:.15px;
-  }
-  input[type=text]:focus, input[type=tel]:focus, textarea:focus{
-    border-color:var(--rose);
-  }
-  textarea{resize:none;height:90px;}
-  input::placeholder, textarea::placeholder{color:#C7B8B4;}
-  .summary-box{
-    background:#fff;
-    border:1.5px dashed var(--line);
-    border-radius:14px;
-    padding:14px 16px;
-    font-size:14px;
-    margin-bottom:6px;
-  }
-  .summary-box b{color:var(--rose-deep);}
+.btn-primary{
+width:100%;background:var(--rose);color:#fff;border:none;border-radius:14px;
+padding:16px;font-size:17px;font-weight:bold;margin-top:26px;cursor:pointer;transition:.2s;
+}
+.btn-primary:disabled{background:#DDB9C5;cursor:not-allowed;}
+.btn-primary:active:not(:disabled){transform:scale(0.98);}
 
-  .btn-primary{
-    width:100%;
-    background:var(--rose);
-    color:#fff;
-    border:none;
-    border-radius:14px;
-    padding:16px;
-    font-size:17px;
-    font-weight:bold;
-    margin-top:26px;
-    cursor:pointer;
-    transition:.2s;
-  }
-  .btn-primary:disabled{background:#DDB9C5;cursor:not-allowed;}
-  .btn-primary:active:not(:disabled){transform:scale(0.98);}
+.btn-back{
+background:none;border:none;color:var(--ink-soft);font-size:14px;
+margin-top:14px;width:100%;text-align:center;cursor:pointer;
+}
 
-  .btn-back{
-    background:none;
-    border:none;
-    color:var(--ink-soft);
-    font-size:14px;
-    margin-top:14px;
-    width:100%;
-    text-align:center;
-    cursor:pointer;
-  }
+/* Blocked slot message */
+.blocked-msg{
+display:none;margin-top:14px;background:#fef0f4;color:var(--rose-deep);
+border:1.5px solid var(--rose-soft);border-radius:12px;
+padding:12px 14px;text-align:center;font-size:14px;line-height:1.5;
+}
 
-  .confirm-wrap{text-align:center;padding-top:10px;}
-  .confirm-icon{
-    width:64px;height:64px;
-    border-radius:50%;
-    background:var(--rose-soft);
-    display:flex;align-items:center;justify-content:center;
-    margin:0 auto 18px;
-    font-size:30px;
-    color:var(--rose-deep);
-  }
-  .confirm-title{font-family:'Georgia',serif;font-size:22px;margin-bottom:8px;}
-  .confirm-sub{color:var(--ink-soft);font-size:14px;margin-bottom:24px;}
-  .ticket{
-    background:#fff;
-    border:2px solid var(--rose-soft);
-    border-radius:18px;
-    padding:22px 20px;
-    text-align:right;
-  }
-  .ticket-row{
-    display:flex;
-    justify-content:space-between;
-    padding:9px 0;
-    border-bottom:1px solid var(--cream);
-    font-size:15px;
-  }
-  .ticket-row:last-child{border-bottom:none;}
-  .ticket-row .lbl{color:var(--ink-soft);}
-  .ticket-row .val{font-weight:bold;}
-  .save-note{
-    margin-top:18px;
-    font-size:13px;
-    color:var(--rose-deep);
-    background:var(--rose-soft);
-    border-radius:12px;
-    padding:12px 14px;
-  }
+.confirm-wrap{text-align:center;padding-top:10px;}
+.confirm-icon{
+width:64px;height:64px;border-radius:50%;background:var(--rose-soft);
+display:flex;align-items:center;justify-content:center;
+margin:0 auto 18px;font-size:30px;color:var(--rose-deep);
+}
+.confirm-title{font-family:'Georgia',serif;font-size:22px;margin-bottom:8px;}
+.confirm-sub{color:var(--ink-soft);font-size:14px;margin-bottom:24px;}
+.ticket{
+background:#fff;border:2px solid var(--rose-soft);border-radius:18px;
+padding:22px 20px;text-align:right;
+}
+.ticket-row{
+display:flex;justify-content:space-between;padding:9px 0;
+border-bottom:1px solid var(--cream);font-size:15px;
+}
+.ticket-row:last-child{border-bottom:none;}
+.ticket-row .lbl{color:var(--ink-soft);}
+.ticket-row .val{font-weight:bold;}
+.save-note{
+margin-top:18px;font-size:13px;color:var(--rose-deep);
+background:var(--rose-soft);border-radius:12px;padding:12px 14px;
+}
 </style>
 </head>
 <body>
 <div class="app">
 
-  <header class="top">
-    <p class="brand">Orny Nails</p>
-    <p class="brand-sub">קביעת תור</p>
-    <div class="progress" id="progressDots">
-      <div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
-    </div>
-  </header>
+<header class="top">
+<p class="brand">Orny Nails</p>
+<p class="brand-sub">קביעת תור</p>
+<div class="progress" id="progressDots">
+<div class="dot active"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+</div>
+</header>
 
-  <!-- SCREEN 1: SERVICE -->
-  <section class="screen visible" id="screen-service">
-    <h2 class="step-title">איזה טיפול תרצי לקבוע?</h2>
-    <div class="service-grid">
-      <div class="service-card" data-service="hands" data-duration="1">
-        <div class="service-icon">💅</div>
-        <div class="service-text"><strong>ידיים</strong><span>כ-60 דקות</span></div>
-      </div>
-      <div class="service-card" data-service="feet" data-duration="1">
-        <div class="service-icon">🦶</div>
-        <div class="service-text"><strong>רגליים</strong><span>כ-60 דקות</span></div>
-      </div>
-      <div class="service-card" data-service="both" data-duration="2">
-        <div class="service-icon">✨</div>
-        <div class="service-text"><strong>ידיים + רגליים</strong><span>כ-120 דקות</span></div>
-      </div>
-    </div>
-  </section>
+<!-- SCREEN 1: SERVICE -->
+<section class="screen visible" id="screen-service">
+<h2 class="step-title">איזה טיפול תרצי לקבוע?</h2>
+<div class="service-grid">
+<div class="service-card" data-service="hands" data-duration="1">
+<div class="service-icon">&#128133;</div>
+<div class="service-text"><strong>ידיים</strong><span>כ-60 דקות</span></div>
+</div>
+<div class="service-card" data-service="feet" data-duration="1">
+<div class="service-icon">&#129494;</div>
+<div class="service-text"><strong>רגליים</strong><span>כ-60 דקות</span></div>
+</div>
+<div class="service-card" data-service="both" data-duration="2">
+<div class="service-icon">&#10024;</div>
+<div class="service-text"><strong>ידיים + רגליים</strong><span>כ-120 דקות</span></div>
+</div>
+</div>
+</section>
 
-  <!-- SCREEN 2: DATE + TIME -->
-  <section class="screen" id="screen-datetime">
-    <h2 class="step-title">בחרי יום ושעה</h2>
+<!-- SCREEN 2: DATE + TIME -->
+<section class="screen" id="screen-datetime">
+<h2 class="step-title">בחרי יום ושעה</h2>
+<div class="cal-wrap">
+<div class="cal-nav">
+<button class="cal-arrow" id="calNext">&#8250;</button>
+<span class="cal-month-label" id="calMonthLabel"></span>
+<button class="cal-arrow" id="calPrev">&#8249;</button>
+</div>
+<div class="cal-grid" id="calGrid">
+<div class="cal-dow">א׳</div>
+<div class="cal-dow">ב׳</div>
+<div class="cal-dow">ג׳</div>
+<div class="cal-dow">ד׳</div>
+<div class="cal-dow">ה׳</div>
+<div class="cal-dow" style="color:#e0c0c8">ו׳</div>
+<div class="cal-dow" style="color:#e0c0c8">ש׳</div>
+</div>
+<div class="holiday-label" id="holidayLabel"></div>
+</div>
+<div id="slotsArea"></div>
+<button class="btn-back" id="backToService">חזרה</button>
+</section>
 
-    <div class="cal-wrap">
-      <div class="cal-nav">
-        <button class="cal-arrow" id="calNext">&#8250;</button>
-        <span class="cal-month-label" id="calMonthLabel"></span>
-        <button class="cal-arrow" id="calPrev">&#8249;</button>
-      </div>
-      <div class="cal-grid" id="calGrid">
-        <div class="cal-dow">א׳</div>
-        <div class="cal-dow">ב׳</div>
-        <div class="cal-dow">ג׳</div>
-        <div class="cal-dow">ד׳</div>
-        <div class="cal-dow">ה׳</div>
-        <div class="cal-dow" style="color:#e0c0c8">ו׳</div>
-        <div class="cal-dow" style="color:#e0c0c8">ש׳</div>
-      </div>
-      <div class="holiday-label" id="holidayLabel"></div>
-    </div>
+<!-- SCREEN 3: DETAILS -->
+<section class="screen" id="screen-details">
+<h2 class="step-title">פרטים אחרונים</h2>
+<div class="summary-box" id="summaryBox"></div>
+<label for="fullname">שם מלא</label>
+<input type="text" id="fullname" placeholder="שם פרטי ושם משפחה">
+<label for="phone">מספר טלפון / וואטסאפ</label>
+<input type="tel" id="phone" placeholder="050-1234567" inputmode="tel">
+<label for="note">הערה (חובה)</label>
+<textarea id="note" placeholder="לדוגמה: רגישות בציפורניים, גוון מועדף וכו׳"></textarea>
+<button class="btn-primary" id="confirmBtn" disabled>אישור הזמנה</button>
+<button class="btn-back" id="backToDate">חזרה</button>
+<div class="blocked-msg" id="blocked-msg"></div>
+</section>
 
-    <div id="slotsArea"></div>
-    <button class="btn-back" id="backToService">חזרה</button>
-  </section>
-
-  <!-- SCREEN 3: DETAILS -->
-  <section class="screen" id="screen-details">
-    <h2 class="step-title">פרטים אחרונים</h2>
-    <div class="summary-box" id="summaryBox"></div>
-    <label for="fullname">שם מלא</label>
-    <input type="text" id="fullname" placeholder="שם פרטי ושם משפחה">
-    <label for="phone">מספר טלפון / וואטסאפ</label>
-    <input type="tel" id="phone" placeholder="050-1234567" inputmode="tel">
-    <label for="note">הערה (חובה)</label>
-    <textarea id="note" placeholder="לדוגמה: רגישות בציפורניים, גוון מועדף וכו׳"></textarea>
-    <button class="btn-primary" id="confirmBtn" disabled>אישור הזמנה</button>
-    <button class="btn-back" id="backToDate">חזרה</button>
-  </section>
-
-  <!-- SCREEN 4: CONFIRMATION -->
-  <section class="screen" id="screen-confirm">
-    <div class="confirm-wrap">
-      <div class="confirm-icon">✓</div>
-      <div class="confirm-title">ההזמנה בוצעה בהצלחה!</div>
-      <div class="confirm-sub">נא לשמור את הפרטים — לא יישלח אישור נוסף</div>
-      <div class="ticket" id="ticketBox"></div>
-      <div class="save-note">📍 רחוב שלום עליכם 18, כפר סבא</div>
-    </div>
-  </section>
+<!-- SCREEN 4: CONFIRMATION -->
+<section class="screen" id="screen-confirm">
+<div class="confirm-wrap">
+<div class="confirm-icon">✓</div>
+<div class="confirm-title">ההזמנה בוצעה בהצלחה!</div>
+<div class="confirm-sub">נא לשמור את הפרטים — לא יישלח אישור נוסף</div>
+<div class="ticket" id="ticketBox"></div>
+<div class="save-note">&#128205; רחוב שלום עליכם 18, כפר סבא</div>
+</div>
+</section>
 
 </div>
 
 <script>
-// ── WEBHOOK URL ──
 const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwBAhyG_jsgqFImM0XJhfv5JfrCpgfdQnIYuFvLFFd6EFobp2t5McxaE77GAVUMFSKn/exec';
 
-const HEBREW_DAYS         = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
+const HEBREW_DAYS = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const HEBREW_MONTHS_SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
-const HEBREW_MONTHS_FULL  = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
+const HEBREW_MONTHS_FULL = ['ינואר','פברואר','מרץ','אפריל','מאי','יוני','יולי','אוגוסט','ספטמבר','אוקטובר','נובמבר','דצמבר'];
 
-const WORK_DAYS  = [0,1,2,3,4];
+const WORK_DAYS = [0,1,2,3,4];
 const WORK_HOURS = [8.5, 9.5, 10.5, 11.5, 12];
 
 let BLOCKED_DAYS = [];
 let HOLIDAY_DAYS = new Map();
-const TAKEN_SLOTS  = {};
+const TAKEN_SLOTS = {};
 
 async function fetchHolidays(){
   const year = new Date().getFullYear();
   try {
     const fetches = [year, year + 1].map(y =>
       fetch(`https://www.hebcal.com/hebcal/?v=1&cfg=json&year=${y}&maj=on&min=off&mod=off&nx=off&ss=off&mf=on&c=off&geo=IL`)
-        .then(r => r.json())
+      .then(r => r.json())
     );
     const results = await Promise.all(fetches);
     results.forEach(data => {
       (data.items || []).forEach(item => {
         if(item.date){
-          const key  = item.date.slice(0, 10);
+          const key = item.date.slice(0, 10);
           const name = item.hebrew || item.title || '';
           if(!HOLIDAY_DAYS.has(key)) HOLIDAY_DAYS.set(key, name);
         }
@@ -476,12 +380,11 @@ async function fetchHolidays(){
 }
 
 let state = { service:null, duration:1, date:null, dateLabel:null, time:null };
-
 let calYear, calMonth;
 
 function initCalendar(){
   const today = new Date();
-  calYear  = today.getFullYear();
+  calYear = today.getFullYear();
   calMonth = today.getMonth();
   renderCalendar();
 }
@@ -489,10 +392,7 @@ function initCalendar(){
 function renderCalendar(){
   const today = new Date();
   today.setHours(0,0,0,0);
-
-  document.getElementById('calMonthLabel').textContent =
-    `${HEBREW_MONTHS_FULL[calMonth]} ${calYear}`;
-
+  document.getElementById('calMonthLabel').textContent = `${HEBREW_MONTHS_FULL[calMonth]} ${calYear}`;
   const isCurrentMonth = (calYear === today.getFullYear() && calMonth === today.getMonth());
   document.getElementById('calPrev').disabled = isCurrentMonth;
 
@@ -518,10 +418,10 @@ function renderCalendar(){
     cell.className = 'cal-day';
     cell.textContent = d;
 
-    const isPast    = date < today;
-    const isWeekend = dow === 5 || dow === 6;
-    const isBlocked = BLOCKED_DAYS.includes(key);
-    const isHoliday = HOLIDAY_DAYS.has(key);
+    const isPast     = date < today;
+    const isWeekend  = dow === 5 || dow === 6;
+    const isBlocked  = BLOCKED_DAYS.includes(key);
+    const isHoliday  = HOLIDAY_DAYS.has(key);
 
     if(isPast || isWeekend || isBlocked){
       cell.classList.add('disabled');
@@ -547,7 +447,6 @@ function renderCalendar(){
         renderSlots(key);
       });
     }
-
     grid.appendChild(cell);
   }
 }
@@ -555,21 +454,17 @@ function renderCalendar(){
 document.getElementById('calPrev').addEventListener('click', () => {
   calMonth--;
   if(calMonth < 0){ calMonth = 11; calYear--; }
-  clearSlots();
-  renderCalendar();
+  clearSlots(); renderCalendar();
 });
-
 document.getElementById('calNext').addEventListener('click', () => {
   calMonth++;
   if(calMonth > 11){ calMonth = 0; calYear++; }
-  clearSlots();
-  renderCalendar();
+  clearSlots(); renderCalendar();
 });
 
 function clearSlots(){
   document.getElementById('slotsArea').innerHTML = '';
-  state.date = null;
-  state.time = null;
+  state.date = null; state.time = null;
 }
 
 function renderSlots(dateKey){
@@ -632,7 +527,7 @@ document.querySelectorAll('.service-card').forEach(card => {
 });
 
 document.getElementById('backToService').addEventListener('click', () => goToScreen('service'));
-document.getElementById('backToDate').addEventListener('click',    () => goToScreen('datetime'));
+document.getElementById('backToDate').addEventListener('click', () => goToScreen('datetime'));
 
 function updateSummary(){
   document.getElementById('summaryBox').innerHTML =
@@ -651,42 +546,65 @@ function validateForm(){
     fullnameInput.value.trim().length > 1
   );
 }
-phoneInput.addEventListener('input',    validateForm);
-noteInput.addEventListener('input',     validateForm);
+phoneInput.addEventListener('input', validateForm);
+noteInput.addEventListener('input', validateForm);
 fullnameInput.addEventListener('input', validateForm);
 
 function normalizePhone(raw){
   const d = raw.replace(/\D/g,'');
-  if(d.length === 10 && d.startsWith('0'))   return '+972' + d.slice(1);
-  if(d.length === 9)                          return '+972' + d;
+  if(d.length === 10 && d.startsWith('0')) return '+972' + d.slice(1);
+  if(d.length === 9) return '+972' + d;
   if(d.length === 12 && d.startsWith('972')) return '+' + d;
   return null;
 }
 
-confirmBtn.addEventListener('click', () => {
+confirmBtn.addEventListener('click', async () => {
   const normalized = normalizePhone(phoneInput.value);
-  fetch(GAS_WEBHOOK_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'text/plain' },
-    body: JSON.stringify({
-      name:      fullnameInput.value.trim(),
-      phone:     normalized,
-      service:   state.service,
-      date:      state.date,
-      dateLabel: state.dateLabel,
-      time:      state.time,
-      duration:  state.duration,
-      note:      noteInput.value.trim()
-    })
-  }).catch(e => console.warn('Webhook error:', e));
+  const errEl = document.getElementById('blocked-msg');
+  errEl.style.display = 'none';
+
+  confirmBtn.disabled = true;
+  const origText = confirmBtn.textContent;
+  confirmBtn.textContent = 'שולחת...';
+
+  try {
+    const resp = await fetch(GAS_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({
+        name:      fullnameInput.value.trim(),
+        phone:     normalized,
+        service:   state.service,
+        date:      state.date,
+        dateLabel: state.dateLabel,
+        time:      state.time,
+        duration:  state.duration,
+        note:      noteInput.value.trim()
+      })
+    });
+    let result = {};
+    try { result = await resp.json(); } catch(e) {}
+
+    if (result.status === 'blocked') {
+      errEl.textContent = result.message || 'מצטערים, השעה הזאת חסומה. אנא בחרי שעה אחרת.';
+      errEl.style.display = 'block';
+      confirmBtn.disabled = false;
+      confirmBtn.textContent = origText;
+      return;
+    }
+  } catch(e) {
+    console.warn('Webhook error:', e);
+    // Network error – proceed so the customer sees the confirmation ticket
+  }
+
   document.getElementById('ticketBox').innerHTML = `
-    <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
-    <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
-    <div class="ticket-row"><span class="lbl">תאריך</span><span class="val">${state.dateLabel}</span></div>
-    <div class="ticket-row"><span class="lbl">שעה</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
-    <div class="ticket-row"><span class="lbl">טלפון</span><span class="val">${normalized}</span></div>
-  `;
+<div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
+<div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
+<div class="ticket-row"><span class="lbl">תאריך</span><span class="val">${state.dateLabel}</span></div>
+<div class="ticket-row"><span class="lbl">שעל</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
+<div class="ticket-row"><span class="lbl">טלפון</span><span class="val">${normalized}</span></div>
+`;
   goToScreen('confirm');
 });
 
