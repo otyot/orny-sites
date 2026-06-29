@@ -344,7 +344,7 @@ background:var(--rose-soft);border-radius:12px;padding:12px 14px;
 </div>
 
 <script>
-const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwBAhyG_jsgqFImM0XJhfv5JfrCpgfdQnIYuFvLFFd6EFobp2t5McxaE77GAVUMFSKn/exec';
+const GAS_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwQhVh281rI_yiw1uQB5F51YKM-zE3zq49iAPW-u9iA_C_OJaGSDe5kvoQeS-E0RTk/exec';
 
 const HEBREW_DAYS = ['ראשון','שני','שלישי','רביעי','חמישי','שישי','שבת'];
 const HEBREW_MONTHS_SHORT = ['ינו׳','פבר׳','מרץ','אפר׳','מאי','יוני','יולי','אוג׳','ספט׳','אוק׳','נוב׳','דצמ׳'];
@@ -602,7 +602,7 @@ confirmBtn.addEventListener('click', async () => {
 <div class="ticket-row"><span class="lbl">שם</span><span class="val">${fullnameInput.value.trim()}</span></div>
 <div class="ticket-row"><span class="lbl">טיפול</span><span class="val">${serviceNames[state.service]}</span></div>
 <div class="ticket-row"><span class="lbl">תאריך</span><span class="val">${state.dateLabel}</span></div>
-<div class="ticket-row"><span class="lbl">שעל</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
+<div class="ticket-row"><span class="lbl">שעה</span><span class="val">${hourLabel(state.time)}–${endTimeLabel(state.time, state.duration)}</span></div>
 <div class="ticket-row"><span class="lbl">טלפון</span><span class="val">${normalized}</span></div>
 `;
   goToScreen('confirm');
