@@ -354,8 +354,35 @@ const WORK_DAYS = [0,1,2,3,4];
 const WORK_HOURS = [8.5, 9.5, 10.5, 11.5, 12];
 
 let BLOCKED_DAYS = [];
+let BLOCKED_SLOTS = {};
 let HOLIDAY_DAYS = new Map();
 const TAKEN_SLOTS = {};
+
+async function fetchBlockedData(){
+  try {
+    const resp = await fetch(GAS_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify({ action: 'getBlocked' })
+    });
+    const result = await resp.json();
+    if (result.status === 'ok') {
+      BLOCKED_DAYS = [];
+      BLOCKED_SLOTS = {};
+      (result.blocked || []).forEach(entry => {
+        if (entry.type === 'day') {
+          BLOCKED_DAYS.push(entry.date);
+        } else if (entry.type === 'slot') {
+          if (!BLOCKED_SLOTS[entry.date]) BLOCKED_SLOTS[entry.date] = [];
+          BLOCKED_SLOTS[entry.date].push({ start: parseFloat(entry.startTime), end: parseFloat(entry.endTime) });
+        }
+      });
+    }
+  } catch(e) {
+    console.warn('Could not fetch blocked data:', e);
+  }
+}
 
 async function fetchHolidays(){
   const year = new Date().getFullYear();
@@ -467,6 +494,12 @@ function clearSlots(){
   state.date = null; state.time = null;
 }
 
+function isSlotBlocked(dateKey, t, dur){
+  const slots = BLOCKED_SLOTS[dateKey] || [];
+  const end = t + dur;
+  return slots.some(s => t < s.end && end > s.start);
+}
+
 function renderSlots(dateKey){
   const area  = document.getElementById('slotsArea');
   const taken = TAKEN_SLOTS[dateKey] || [];
@@ -477,7 +510,7 @@ function renderSlots(dateKey){
   }
   let html = '<div class="slots-label">בחרי שעה:</div><div class="slots-grid">';
   valid.forEach(t => {
-    const isTaken = taken.includes(String(t));
+    const isTaken = taken.includes(String(t)) || isSlotBlocked(dateKey, t, state.duration);
     html += `<div class="slot-btn${isTaken ? ' taken' : ''}" data-time="${t}">${hourLabel(t)}</div>`;
   });
   html += '</div>';
@@ -618,7 +651,7 @@ function goToScreen(name){
   document.querySelectorAll('#progressDots .dot').forEach((d,i) => {
     d.classList.toggle('active', i <= idx);
   });
-  if(name === 'datetime') initCalendar();
+  if(name === 'datetime') fetchBlockedData().then(() => initCalendar());
   if(name === 'details'){ updateSummary(); validateForm(); }
   window.scrollTo(0,0);
 }
