@@ -446,7 +446,7 @@ function renderCalendar(){
     cell.textContent = d;
 
     const isPast     = date < today;
-    const isWeekend  = dow === 5 || dow === 6;
+    const isWeekend  = !WORK_DAYS.includes(dow);
     const isBlocked  = BLOCKED_DAYS.includes(key);
     const isHoliday  = HOLIDAY_DAYS.has(key);
 
