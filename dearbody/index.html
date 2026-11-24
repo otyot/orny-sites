@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>שלושה שבועות עם עצמי</title>
+<style>
+:root{--bg:#fff4f7;--ink:#4a3040;--soft:#a08492;--main:#d9608a;--main2:#f29bb8;--card:#fff;--line:#f7dce6}
+*{box-sizing:border-box}
+body{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ctext x='18' y='40' font-size='22' opacity='.13'%3E%F0%9F%92%97%3C/text%3E%3Ctext x='100' y='120' font-size='16' opacity='.10'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E");margin:0;font-family:"Heebo","Assistant",Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;display:flex;justify-content:center}
+main{width:100%;max-width:480px;padding:22px 18px 90px}
+h1{font-size:26px;line-height:1.3;margin:10px 0 8px}
+h2{font-size:22px;line-height:1.4;margin:6px 0 18px}
+p{line-height:1.6;font-size:17px;margin:8px 0}
+.soft{color:var(--soft);font-size:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;box-shadow:0 4px 14px rgba(217,96,138,.08);margin:14px 0}
+button{font:inherit;cursor:pointer}
+.btn{display:block;width:100%;padding:16px;border:0;border-radius:30px;background:linear-gradient(135deg,var(--main),var(--main2));color:#fff;font-size:19px;font-weight:700;margin-top:18px}
+.btn.ghost{background:#fff;color:var(--main);border:2px solid var(--main)}
+.opt{display:block;width:100%;text-align:center;padding:16px;margin:10px 0;border:2px solid var(--line);border-radius:26px;background:#fff;font-size:19px;color:var(--ink)}
+.opt:active{background:#ffe6ee;border-color:var(--main)}
+.scale{display:flex;gap:8px;justify-content:space-between;direction:ltr}
+.scale .opt{margin:0;padding:18px 0;font-size:22px;font-weight:700}
+.ends{display:flex;justify-content:space-between;font-size:14px;color:var(--soft);margin-top:8px}
+.dots{display:flex;gap:6px;margin:14px 0}
+.dot{flex:1;height:10px;border-radius:6px;background:var(--line)}
+.dot.on{background:var(--main2)}
+.dot.today{outline:2px solid var(--main);outline-offset:2px}
+.prog{font-size:14px;color:var(--soft);margin-bottom:4px}
+table{width:100%;border-collapse:collapse;margin-top:8px}
+td,th{font-size:13px;padding:4px 2px;text-align:center}
+th{color:var(--soft);font-weight:400}
+.cell{height:30px;border-radius:7px;border:1px solid var(--line)}
+.qname{font-weight:700;font-size:16px;margin-top:14px}
+.legend{font-size:12px;color:var(--soft)}
+ul{padding-inline-start:20px;line-height:1.7;font-size:17px}
+footer{position:fixed;bottom:0;left:0;right:0;background:#ffe9f0;color:#7a5566;font-size:12.5px;text-align:center;padding:9px 12px;border-top:1px solid var(--line)}
+textarea{width:100%;font:inherit;font-size:17px;padding:12px;border:2px solid var(--line);border-radius:14px;direction:rtl;resize:none}
+input[type=text]{width:100%;font:inherit;font-size:18px;padding:13px 16px;border:2px solid var(--line);border-radius:26px;direction:rtl;margin:8px 0}
+.hide{display:none!important}
+@media print{footer,.noprint{display:none!important}body{background:#fff}main{max-width:none;padding:0}.card{break-inside:avoid}}
+</style>
+</head>
+<body>
+<main id="app"></main>
+<footer>זה לא כלי רפואי ואין כאן אבחון. התשובות נשמרות רק בטלפון שלך. אם קשה לך מאוד: ער״ן 1201.</footer>
+<script>
+// ---- הגדרות ----
+var FEEDBACK_WHATSAPP = "972505552165"; // מספר וואטסאפ של אורני בפורמט בינלאומי, בלי + ובלי רווחים, לדוגמה 9725XXXXXXXX. ריק = הכפתור מוסתר.
+var DAYS = 7, NW = 3, TOTAL = DAYS*NW, KEY = "weeks_v1";
+var HOT = {id:"hot", name:"גלי חום", text:"כמה גלי חום היו היום?", type:"opts", opts:[["0",0],["1–3",0.5],["4 ומעלה",1]]};
+var WEEKS = [
+ {name:"שינה ועייפות", qs:[
+  {id:"sleep", name:"שינה", text:"כמה שעות ישנת הלילה?", type:"opts", opts:[["פחות מ-5",1],["5–6",0.5],["7 ומעלה",0]]},
+  {id:"woke", name:"התעוררויות", text:"התעוררת באמצע הלילה?", type:"opts", opts:[["לא",0],["פעם אחת",0.5],["כמה פעמים",1]]},
+  {id:"tired", name:"עייפות", text:"כמה עייפה את עכשיו?", type:"scale", low:"ממש לא עייפה", high:"מותשת"}, HOT]},
+ {name:"מצב רוח ועצבנות", qs:[
+  {id:"mood", name:"מצב רוח", text:"איך מצב הרוח שלך היום?", type:"scale", low:"מצוין", high:"קשה", rev:true},
+  {id:"irr", name:"עצבנות", text:"היית עצבנית או חסרת סבלנות היום?", type:"opts", opts:[["לא",0],["קצת",0.5],["הרבה",1]]},
+  {id:"rest", name:"חוסר מנוחה", text:"היית חסרת מנוחה או שקט פנימי?", type:"opts", opts:[["לא",0],["קצת",0.5],["הרבה",1]]}, HOT]},
+ {name:"גוף וריכוז", qs:[
+  {id:"belly", name:"בטן", text:"איך הבטן היום?", type:"opts", opts:[["רגועה",0],["תפוחה",0.5],["לוחצת",1]]},
+  {id:"energy", name:"כוח", text:"כמה היה לך כוח לזוז היום?", type:"scale", low:"הרבה", high:"אין בכלל", rev:true},
+  {id:"focus", name:"ריכוז", text:"איך היה הריכוז היום?", type:"scale", low:"מצוין", high:"קשה", rev:true}, HOT]}
+];
+// ---- אחסון (רק במכשיר) ----
+var mem = {data:null};
+function load(){ try{ var s=localStorage.getItem(KEY); if(s) return JSON.parse(s);}catch(e){} return mem.data||{start:null,answers:{}}; }
+function save(d){ mem.data=d; try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+function reset(){ mem.data=null; try{ localStorage.removeItem(KEY);}catch(e){} }
+function ymd(d){ var m=d.getMonth()+1, dd=d.getDate(); return d.getFullYear()+"-"+(m<10?"0":"")+m+"-"+(dd<10?"0":"")+dd; }
+function addDays(s,n){ var p=s.split("-"); return ymd(new Date(+p[0],+p[1]-1,+p[2]+n)); }
+function diffDays(a,b){ var p=a.split("-"),q=b.split("-"); return Math.round((new Date(+q[0],+q[1]-1,+q[2])-new Date(+p[0],+p[1]-1,+p[2]))/864e5); }
+var app=document.getElementById("app");
+var state={q:0,cur:{},list:[]};
+function today(){ return ymd(new Date()); }
+function esc(s){ return String(s).replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c];}); }
+function dayNo(d){ return d.start? diffDays(d.start,today())+1 : 0; }
+function weekOf(n){ return Math.floor((n-1)/DAYS); }
+// ---- מסכים ----
+function home(){
+  var d=load(), t=today();
+  if(!d.start) return welcome();
+  var n=dayNo(d);
+  if(n>TOTAL) return summary();
+  if(n<1) n=1;
+  var w=weekOf(n), dw=n-w*DAYS, done=!!d.answers[t];
+  var dots=""; for(var i=0;i<DAYS;i++){ var day=addDays(d.start,w*DAYS+i); dots+='<div class="dot'+(d.answers[day]?' on':'')+(day===t?' today':'')+'"></div>'; }
+  var h='<div class="prog">שבוע '+(w+1)+' מתוך '+NW+' · '+WEEKS[w].name+'</div><h1>יום '+dw+' מתוך '+DAYS+' 🌸</h1><div class="dots">'+dots+'</div>';
+  if(done){
+    h+='<div class="card"><p><b>את כבר ענית היום.</b> '+(dw===DAYS?'זה היום האחרון של השבוע, הדף שלך מוכן.':'תודה. נתראה מחר, לוקח פחות מדקה.')+'</p></div>';
+  } else {
+    h+='<p>איך היה הלילה? '+WEEKS[w].qs.length+' שאלות קצרות, לחיצה אחת כל אחת.</p><button class="btn" onclick="startQ()">מתחילות</button>';
+  }
+  var answered=Object.keys(d.answers).length;
+  if(answered>=1) h+='<button class="btn'+(done&&dw===DAYS?'':' ghost')+'" onclick="summary()">'+(dw===DAYS?'לדף שלי':'לראות את הדף שלי עד עכשיו')+'</button>';
+  h+='<p style="text-align:center;margin-top:30px"><a href="#" class="soft" onclick="again();return false">להתחיל מהתחלה</a></p>';
+  return render(h);
+}
+function welcome(){
+  render('<div style="font-size:46px;text-align:center">🌸</div><h1 style="text-align:center">שלושה שבועות עם עצמי</h1>'+
+  '<p style="text-align:center">היי יקרה 💗<br>שלושה שבועות קטנים שהם רק שלך. כל יום ארבע שאלות קצרות, בכל שבוע נושא אחר, ובסוף דף שמראה איך עברו עלייך הימים, ושאפשר להביא לרופאה.</p>'+
+  '<div class="card"><p>🌷 לוקח פחות מדקה ביום<br>🌷 בלי הרשמה<br>🌷 התשובות נשארות בטלפון שלך ולא נשלחות לאף אחד</p></div>'+
+  '<div class="card"><div class="qname" style="margin-top:0">איך קוראים לך, ובת כמה את?</div><input id="nm" type="text" maxlength="30" placeholder="שם פרטי (לא חובה)" autocomplete="given-name"><input id="ag" type="text" inputmode="numeric" maxlength="2" placeholder="גיל (לא חובה)"><p class="soft" style="margin-bottom:0">יופיעו רק בדף שלך, ונשארים בטלפון.</p></div>'+
+  '<button class="btn" onclick="begin()">אני רוצה להתחיל 💗</button>'+
+  '<p class="soft">כדאי לשמור את הדף במסך הבית של הטלפון ולחזור אליו כל יום, באותו מכשיר ובאותו דפדפן.</p>');
+}
+function begin(){ var d=load(); var e=document.getElementById('nm'); d.name=e?(e.value||'').trim():''; var g=document.getElementById('ag'); var gv=g?parseInt(g.value,10):NaN; d.age=(gv>=18&&gv<=99)?gv:null; d.start=today(); d.answers=d.answers||{}; save(d); startQ(); }
+function startQ(){ var d=load(); state.list=WEEKS[weekOf(dayNo(d))].qs; state.q=0; state.cur={}; question(); }
+function question(){
+  var q=state.list[state.q], h='<div class="prog">שאלה '+(state.q+1)+' מתוך '+state.list.length+'</div><h2>'+q.text+'</h2>';
+  if(q.type==="opts"){
+    q.opts.forEach(function(o,i){ h+='<button class="opt" onclick="answer('+i+')">'+o[0]+'</button>'; });
+  } else {
+    h+='<div class="scale">'; for(var v=1;v<=5;v++) h+='<button class="opt" onclick="answer('+v+')">'+v+'</button>'; h+='</div>';
+    h+='<div class="ends"><span>'+q.high+'</span><span>'+q.low+'</span></div>';
+  }
+  render(h);
+}
+function answer(v){
+  state.cur[state.list[state.q].id]=v; state.q++;
+  if(state.q<state.list.length) return question();
+  note();
+}
+function note(){
+  render('<div class="prog">אופציונלי</div><h2>יש משהו שתרצי להוסיף על היום? בכמה מילים.</h2>'+
+  '<textarea id="note" maxlength="200" rows="4" placeholder="רק אם בא לך. אפשר לדלג."></textarea>'+
+  '<p class="soft">זה נשאר בטלפון שלך ויופיע בדף שלך, במילים שלך.</p>'+
+  '<button class="btn" onclick="finish(true)">שמירה</button>'+
+  '<button class="btn ghost" onclick="finish(false)">דילוג</button>');
+}
+function finish(withNote){
+  if(withNote){ var t=(document.getElementById("note").value||"").trim(); if(t) state.cur.note=t; }
+  var d=load(); d.answers[today()]=state.cur; save(d);
+  var n=dayNo(d), dw=n-weekOf(n)*DAYS, last=(dw===DAYS);
+  var msg = n>=TOTAL ? 'סיימת את שלושת השבועות. הדף שלך מוכן.' : last ? 'סיימת שבוע. הדף שלו מוכן, ומחר מתחיל שבוע חדש.' : 'תודה שהקדשת לעצמך רגע. נתראה מחר 🌷';
+  render('<div style="font-size:46px;text-align:center">💗</div><h1 style="text-align:center">נרשם</h1><p style="text-align:center">'+msg+'</p><button class="btn" onclick="'+(last?'summary()':'home()')+'">'+(last?'לדף שלי':'סגירה')+'</button>');
+}
+function lab(q,v){ return q.type==="scale"? String(v) : q.opts[v][0]; }
+function lvl(q,v){ if(q.type==="scale"){ var x=(v-1)/4; return q.rev? x : x; } return q.opts[v][1]; }
+function shade(x){ var a=0.12+0.78*x; return "rgba(217,96,138,"+a.toFixed(2)+")"; }
+function fmt(s){ var p=s.split("-"); return +p[2]+"."+ +p[1]; }
+function summary(){
+  var d=load(); if(!d.start) return welcome();
+  var n=Math.min(Math.max(dayNo(d),1),TOTAL), cw=weekOf(n);
+  var h='<h1>'+(d.name?'הדף של '+esc(d.name):'הדף שלי')+' 💗</h1>'+(d.age?'<p class="soft" style="margin:0">בת '+d.age+'</p>':'')+'<p class="soft">'+esc(fmt(d.start))+' – '+esc(fmt(addDays(d.start,n-1)))+'. מבוסס רק על מה שעניתי בעצמי.</p>';
+  for(var w=0;w<=cw;w++){
+    var any=false; for(var i=0;i<DAYS;i++) if(d.answers[addDays(d.start,w*DAYS+i)]) any=true;
+    if(!any) continue;
+    h+='<h2 style="margin-top:26px">שבוע '+(w+1)+': '+WEEKS[w].name+'</h2>';
+    WEEKS[w].qs.forEach(function(q){
+      h+='<div class="card"><div class="qname">'+q.name+' – '+q.text+'</div><table><tr>';
+      for(var i=0;i<DAYS;i++) h+='<th>'+(i+1)+'</th>'; h+='</tr><tr>';
+      var counts={}, nAns=0;
+      for(var i=0;i<DAYS;i++){
+        var a=d.answers[addDays(d.start,w*DAYS+i)];
+        if(a && a[q.id]!==undefined){ var v=a[q.id]; nAns++; counts[lab(q,v)]=(counts[lab(q,v)]||0)+1;
+          h+='<td><div class="cell" style="background:'+shade(lvl(q,v))+'"></div><div class="legend">'+lab(q,v)+'</div></td>';
+        } else h+='<td><div class="cell"></div><div class="legend">–</div></td>';
+      }
+      h+='</tr></table><p class="soft">ענית ב-'+nAns+' ימים מתוך '+DAYS+'. ';
+      var parts=[]; for(var k in counts) parts.push(counts[k]+'× '+k); h+=esc(parts.join(' · '))+'</p>';
+      h+='<div class="legend">צבע כהה = יותר קשה</div></div>';
+    });
+  }
+  var notes=[]; for(var i=0;i<TOTAL;i++){ var a=d.answers[addDays(d.start,i)]; if(a&&a.note) notes.push('<li><span class="soft">יום '+(i+1)+':</span> '+esc(a.note)+'</li>'); }
+  if(notes.length) h+='<div class="card"><div class="qname">מה כתבתי במילים שלי</div><ul>'+notes.join('')+'</ul></div>';
+  h+='<div class="card"><div class="qname">שאלות אפשריות לרופאה</div><ul>'+
+   '<li>האם מה שאני מרגישה יכול להיות קשור לגיל המעבר?</li>'+
+   '<li>אילו בדיקות מתאימות לי?</li>'+
+   '<li>מה אפשר לעשות לגבי מה שהכי מפריע לי?</li></ul></div>';
+  if(FEEDBACK_WHATSAPP){
+    h+='<div class="card noprint"><div class="qname">שליחה לאורני</div><p class="soft">אפשר לשלוח לאורני את התשובות שלך בוואטסאפ, והיא תכין לך דוח מסודר להבאה לרופאה. לחיצה רק פותחת הודעה, ואת בוחרת אם לשלוח.</p><p class="soft">הוואטסאפ של אורני: 050-5552165</p>'+
+      '<label style="display:block;margin:8px 0;font-size:16px"><input type="checkbox" id="incnote"> לכלול גם את מה שכתבתי במילים שלי</label>';
+    for(var w=0;w<=cw;w++){ var anyw=false; for(var i=0;i<DAYS;i++) if(d.answers[addDays(d.start,w*DAYS+i)]) anyw=true; if(anyw) h+='<button class="btn" onclick="sendWA('+w+','+w+')">לשלוח את שבוע '+(w+1)+'</button>'; }
+    if(cw>0) h+='<button class="btn ghost" onclick="sendWA(0,'+cw+')">לשלוח הכול (שבועות 1–'+(cw+1)+')</button>';
+    h+='</div>';
+  }
+  h+='<button class="btn noprint" onclick="window.print()">שמירה כ-PDF / הדפסה</button>';
+  h+='<button class="btn ghost noprint" onclick="home()">חזרה</button>';
+  h+='<div class="card noprint"><div class="qname">עזר לך?</div><p class="soft">נשמח לדעת, זה עוזר לנו לשפר.</p>'+
+     '<div id="fb"><button class="opt" onclick="fb(1)">כן, עזר</button><button class="opt" onclick="fb(0)">לא ממש</button></div></div>';
+  render(h);
+}
+function sendWA(w1,w2){
+  var d=load(), inc=document.getElementById("incnote").checked;
+  var L=["היי אורני, אלה התשובות שלי"+(d.name?" ("+d.name+(d.age?", בת "+d.age:"")+")":"")+". אני מאשרת לך לקבל את המידע כדי להכין לי דוח."];
+  for(var w=w1;w<=w2;w++){
+    L.push("","שבוע "+(w+1)+": "+WEEKS[w].name);
+    for(var i=0;i<DAYS;i++){
+      var a=d.answers[addDays(d.start,w*DAYS+i)]; if(!a) continue;
+      var p=[]; WEEKS[w].qs.forEach(function(q){ if(a[q.id]!==undefined) p.push(q.name+" "+lab(q,a[q.id])); });
+      L.push("יום "+(i+1)+": "+p.join(" | ")+(inc&&a.note?" | "+a.note:""));
+    }
+  }
+  window.location.href="https://wa.me/"+FEEDBACK_WHATSAPP+"?text="+encodeURIComponent(L.join("\n"));
+}
+function fb(v){
+  var txt = v? "עזר לי. " : "לא ממש עזר לי. ";
+  var box=document.getElementById("fb");
+  if(FEEDBACK_WHATSAPP){
+    box.innerHTML='<p>אפשר לכתוב לאורני במילים שלך (רק מה שנוח לך, בלי פרטים רפואיים):</p><a class="btn" style="text-decoration:none;text-align:center" href="https://wa.me/'+FEEDBACK_WHATSAPP+'?text='+encodeURIComponent(txt)+'">שליחה בוואטסאפ</a>';
+  } else box.innerHTML='<p>תודה, זה חשוב לנו 💗</p>';
+}
+function again(){
+  render('<h2>להתחיל מהתחלה?</h2><p>כל התשובות יימחקו מהטלפון.</p>'+
+  '<button class="btn" onclick="doReset()">כן, למחוק ולהתחיל</button>'+
+  '<button class="btn ghost" onclick="home()">ביטול</button>');
+}
+function doReset(){ reset(); welcome(); }
+function render(h){ app.innerHTML=h; window.scrollTo(0,0); }
+window.home=home;
+home();
+</script>
+</body>
+</html>
